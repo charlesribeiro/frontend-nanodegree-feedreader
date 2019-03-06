@@ -110,12 +110,18 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+        var resultsAvailable = false;
+
         beforeEach(function(done) 
         {
             setTimeout(function() {
                 var err = null;
                 try {
-                    loadFeed(0);
+                    loadFeed(0, function()
+                    {
+                        resultsAvailable = true;
+  
+                    });
                 } catch (e) {
                   err = e;
                 }
@@ -125,12 +131,11 @@ $(function() {
 
         it('loadFeed is called and completed', function() {
 
-            var containerContents = $('.entry');
-            //var element = document.getElementById("feed");
+            debugger;
 
-            console.log(containerContents);
+            expect(resultsAvailable).not.toBe(false);
 
-            expect(containerContents.length).not.toBe(0);
+            
             
         });
 
