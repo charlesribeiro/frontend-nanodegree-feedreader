@@ -110,9 +110,27 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+        beforeEach(function(done) 
+        {
+            setTimeout(function() {
+                var err = null;
+                try {
+                    loadFeed(0);
+                } catch (e) {
+                  err = e;
+                }
+                done(err);
+              });
+        });
+
         it('loadFeed is called and completed', function() {
 
-    
+            var containerContents = $('.entry');
+            //var element = document.getElementById("feed");
+
+            console.log(containerContents);
+
+            expect(containerContents.length).not.toBe(0);
             
         });
 
@@ -126,6 +144,19 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        
+        beforeEach(function(done) 
+        {
+            setTimeout(function() {
+                var err = null;
+                try {
+                    loadFeed(0);
+                } catch (e) {
+                  err = e;
+                }
+                done(err);
+              });
+        });
 
         it('new feed is loaded by loadFeed function', function() {
 
