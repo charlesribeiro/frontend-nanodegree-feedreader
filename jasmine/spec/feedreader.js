@@ -72,6 +72,7 @@ $(function() {
 
         it('is menu element hidden by default', function() {
 
+            expect($('body').hasClass('menu-hidden')).toBe(true);
             
         });
 
@@ -82,6 +83,16 @@ $(function() {
           */
 
          it('menu changes visibility when menu is clicked', function() {
+
+            var menuIcon = $('.menu-icon-link');
+
+            menuIcon.click();
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+
+
+            menuIcon.click();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+
 
             
         });
