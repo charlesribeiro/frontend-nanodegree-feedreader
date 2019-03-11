@@ -111,23 +111,16 @@ $(function() {
          */
 
         var resultsAvailable = false;
-        var feedListChildrenLenght = 0;
+        var feedList = 0;
 
         beforeEach(function(done) 
         {
             loadFeed(0, function()
             {
                 resultsAvailable = true;
-
                 feedList = $('.entry-link').length;
-                console.log(feedList);
-                //console.log($('.entry-link').length);
-
                 done();
             });
-
-
-
 
         });
 
@@ -135,7 +128,6 @@ $(function() {
 
 
             expect(resultsAvailable).toBe(true);
-            console.log(feedList);
             expect(feedList).not.toEqual(0);
 
             done();
@@ -153,24 +145,29 @@ $(function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
+         * 
          */
+
+        var feedList0;
+        var feedList1;
         
         beforeEach(function(done) 
         {
-            setTimeout(function() {
-                var err = null;
-                try {
-                    loadFeed(0);
-                } catch (e) {
-                  err = e;
-                }
-                done(err);
-              });
+            loadFeed(0, function()
+            {
+                feedList0 = $('.entry-link');
+                loadFeed(1, function()
+                {
+                    feedList1 = $('.entry-link');
+                    done();
+                });
+            });
+
         });
 
         it('new feed is loaded by loadFeed function', function() {
 
-    
+            expect(feedList0).not.toEqual(feedList1);
             
         });
 
