@@ -111,29 +111,34 @@ $(function() {
          */
 
         var resultsAvailable = false;
+        var feedListChildrenLenght = 0;
 
         beforeEach(function(done) 
         {
-            setTimeout(function() {
-                var err = null;
-                try {
-                    loadFeed(0, function()
-                    {
-                        resultsAvailable = true;
-  
-                    });
-                } catch (e) {
-                  err = e;
-                }
-                done(err);
-              });
+            loadFeed(0, function()
+            {
+                resultsAvailable = true;
+
+                feedList = $('.entry-link').length;
+                console.log(feedList);
+                //console.log($('.entry-link').length);
+
+                done();
+            });
+
+
+
+
         });
 
-        it('loadFeed is called and completed', function() {
+        it('loadFeed is called and completed', function(done) {
 
-            debugger;
 
-            expect(resultsAvailable).not.toBe(false);
+            expect(resultsAvailable).toBe(true);
+            console.log(feedList);
+            expect(feedList).not.toEqual(0);
+
+            done();
 
             
             
